@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'view/login_page.dart';
+import 'routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
           bodyMedium: TextStyle(color: Colors.white),
         ),
       ),
-      home: const LoginPage(),
+      onGenerateRoute: (settings) => PageRoutes.buildRoute(settings),
     );
   }
 }

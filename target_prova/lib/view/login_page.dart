@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../widgets/custom_text_form_field.dart';
-import 'routes.dart';
+import '../routes.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -12,64 +13,96 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        height: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color.fromRGBO(27, 77, 101, 1),
-              Color.fromRGBO(45, 149, 142, 1),
+    return Form(
+      key: formKey,
+      child: Scaffold(
+        body: Container(
+          height: double.infinity,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color.fromRGBO(27, 77, 101, 1),
+                Color.fromRGBO(45, 149, 142, 1),
+              ],
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Spacer(),
+              CustomTextFormField(
+                labelText: 'Usuário',
+                maxLength: 20,
+                prefixIcon: const Icon(Icons.person),
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp("[^ ]*"))
+                ],
+                validator: (value) {
+                  if (value == "") {
+                    return 'Campo obrigatório!';
+                  }
+
+                  return null;
+                },
+              ),
+              const Divider(height: 20),
+              CustomTextFormField(
+                labelText: 'Senha',
+                maxLength: 20,
+                obscureText: true,
+                prefixIcon: const Icon(Icons.lock),
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp("^[a-zA-Z0-9]*"))
+                ],
+                validator: (value) {
+                  if (value!.length < 2) {
+                    return 'Carácteres insuficientes!';
+                  }
+
+                  return null;
+                },
+              ),
+              const Divider(height: 30),
+              SizedBox(
+                width: 160,
+                height: 45,
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25.0)),
+                    ),
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.green),
+                  ),
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
+                      Navigator.pushNamed(context, PageRoutes.informationsPage);
+                    }
+                  },
+                  child: const Text("Entrar"),
+                ),
+              ),
+              const Spacer(),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: GestureDetector(
+                  onTap: () =>
+                      launchUrl(Uri.parse("https://www.google.com.br/")),
+                  child: const Text(
+                    "Política de Privacidade",
+                  ),
+                ),
+              ),
             ],
           ),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(bottom: 20),
-              child: CustomTextFormField(
-                labelText: 'Usuário',
-                prefixIcon: Icon(Icons.person),
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(bottom: 35),
-              child: CustomTextFormField(
-                labelText: 'Senha',
-                obscureText: true,
-                prefixIcon: Icon(Icons.lock),
-              ),
-            ),
-            SizedBox(
-              width: 140,
-              height: 45,
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25.0)),
-                  ),
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.green),
-                ),
-                onPressed: () =>
-                    Navigator.pushNamed(context, PageRoutes.informationsPage),
-                child: const Text("Entrar"),
-              ),
-            ),
-            GestureDetector(
-              onTap: () => launchUrl(Uri.parse("https://www.google.com.br/")),
-              child: const Text(
-                "Política de Privacidade",
-              ),
-            ),
-          ],
         ),
       ),
     );

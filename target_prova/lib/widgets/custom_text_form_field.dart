@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String labelText;
+  final String? hintText;
+  final String? Function(String?)? validator;
   final int? maxLength;
   final bool obscureText;
+
   final Widget? prefixIcon;
   final TextEditingController? controller;
+  final TextAlign textAlign;
+  final List<TextInputFormatter>? inputFormatters;
 
   const CustomTextFormField({
     this.labelText = '',
+    this.hintText,
     this.maxLength,
     this.obscureText = false,
+    this.validator,
     this.prefixIcon,
     this.controller,
+    this.textAlign = TextAlign.start,
+    this.inputFormatters,
     Key? key,
   }) : super(key: key);
 
@@ -25,7 +35,7 @@ class CustomTextFormField extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(8, 0 , 0, 8),
+            padding: const EdgeInsets.fromLTRB(8, 0, 0, 8),
             child: Text(labelText),
           ),
           Container(
@@ -34,10 +44,18 @@ class CustomTextFormField extends StatelessWidget {
               color: Colors.white,
             ),
             child: TextFormField(
+              controller: controller,
+              inputFormatters: inputFormatters ?? [],
+              validator: validator,
               obscureText: obscureText,
+              textAlign: textAlign,
+              maxLength: maxLength,
               decoration: InputDecoration(
                 prefixIcon: prefixIcon,
                 prefixIconColor: Colors.black,
+                hintText: hintText,
+                hintStyle: const TextStyle(fontWeight: FontWeight.bold),
+                counterText: "",
               ),
             ),
           ),

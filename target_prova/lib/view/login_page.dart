@@ -13,8 +13,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  TextEditingController usuarioController = TextEditingController();
+  TextEditingController senhaController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
+//TODO | Ajustar o validator dos campos e remover a linha de input
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -38,6 +40,7 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               const Spacer(),
               CustomTextFormField(
+                controller: usuarioController,
                 labelText: 'Usuário',
                 maxLength: 20,
                 prefixIcon: const Icon(Icons.person),
@@ -54,6 +57,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const Divider(height: 20),
               CustomTextFormField(
+                controller: senhaController,
                 labelText: 'Senha',
                 maxLength: 20,
                 obscureText: true,
@@ -84,6 +88,8 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
+                      usuarioController.text = '';
+                      senhaController.text = '';
                       Navigator.pushNamed(context, PageRoutes.informationsPage);
                     }
                   },

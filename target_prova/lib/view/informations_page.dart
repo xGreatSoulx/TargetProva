@@ -29,10 +29,30 @@ class _InformationsPageState extends State<InformationsPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Spacer(),
-            Container(
-              width: MediaQuery.of(context).size.width * 0.80,
-              height: MediaQuery.of(context).size.height * 0.4,
-              color: Colors.white,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32),
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.4,
+                color: Colors.white,
+                child: const Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Texto Digitado 1',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        Icon(Icons.edit),
+                        Icon(
+                          Icons.cancel,
+                          color: Colors.red,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             ),
             CustomTextFormField(
               textAlign: TextAlign.center,

@@ -11,6 +11,13 @@ class InformationsPage extends StatefulWidget {
 }
 
 class _InformationsPageState extends State<InformationsPage> {
+  List<String> informations = [
+    'TESTE1',
+    'TESTE2',
+    'TESTE3',
+    'TESTE4',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,19 +41,44 @@ class _InformationsPageState extends State<InformationsPage> {
               child: Container(
                 height: MediaQuery.of(context).size.height * 0.4,
                 color: Colors.white,
-                child: const Column(
+                child: Column(
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
+                        const Text(
                           'Texto Digitado 1',
                           style: TextStyle(color: Colors.black),
                         ),
-                        Icon(Icons.edit),
-                        Icon(
-                          Icons.cancel,
-                          color: Colors.red,
+                        const Icon(Icons.edit),
+                        GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) => AlertDialog(
+                                title: const Text("Removendo..."),
+                                content: const Text(
+                                    "Deseja remover essa informação?"),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      informations.remove('TESTE1');
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text('Sim'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(context),
+                                    child: const Text('Não'),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                          child: const Icon(
+                            Icons.cancel,
+                            color: Colors.red,
+                          ),
                         ),
                       ],
                     ),
@@ -81,3 +113,40 @@ class _InformationsPageState extends State<InformationsPage> {
     );
   }
 }
+
+// Stack(
+//                                   clipBehavior: Clip.none,
+//                                   children: [
+//                                     const Padding(
+//                                       padding: EdgeInsets.all(24.0),
+//                                       child: Row(
+//                                         children: [
+//                                           Padding(
+//                                             padding: EdgeInsets.symmetric(
+//                                                 horizontal: 8.0),
+//                                             child: Icon(
+//                                               Icons.warning_amber_rounded,
+//                                               color: Colors.amber,
+//                                               size: 50,
+//                                             ),
+//                                           ),
+//                                           Text('Atenção'),
+//                                         ],
+//                                       ),
+//                                     ),
+//                                     Align(
+//                                       alignment: Alignment.topRight,
+//                                       child: Padding(
+//                                         padding: const EdgeInsets.symmetric(
+//                                             horizontal: 8.0, vertical: 4.0),
+//                                         child: IconButton(
+//                                           icon: const Icon(Icons.cancel),
+//                                           padding: EdgeInsets.zero,
+//                                           onPressed: () =>
+//                                               Navigator.pop(context),
+//                                         ),
+//                                       ),
+//                                     ),
+//                                   ],
+//                                 ),
+                                

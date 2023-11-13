@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'view/informations_page.dart';
-import 'view/login_page.dart';
+import 'pages/informations_page.dart';
+import 'pages/login_page.dart';
 
 class PageRoutes {
   static const String loginPage = '/loginPage';

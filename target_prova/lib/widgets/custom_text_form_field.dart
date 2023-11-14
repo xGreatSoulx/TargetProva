@@ -51,6 +51,7 @@ class CustomTextFormField extends StatelessWidget {
               inputFormatters: inputFormatters ?? [],
               validator: validator,
               onFieldSubmitted: onFieldSubmitted,
+              
               obscureText: obscureText,
               textAlign: textAlign,
               maxLength: maxLength,
@@ -61,6 +62,7 @@ class CustomTextFormField extends StatelessWidget {
                 hintText: hintText,
                 hintStyle: const TextStyle(fontWeight: FontWeight.bold),
                 counterText: "",
+                border: InputBorder.none,
               ),
             ),
           ),

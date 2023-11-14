@@ -16,7 +16,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController usuarioController = TextEditingController();
   TextEditingController senhaController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-//TODO | Ajustar o validator dos campos e remover a linha de input
+//TODO | Ajustar o validator dos campos
   @override
   Widget build(BuildContext context) {
     return Form(

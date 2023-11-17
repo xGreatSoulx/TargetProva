@@ -6,6 +6,7 @@ class CustomTextFormField extends StatelessWidget {
   final String? hintText;
   final String? Function(String?)? validator;
   final Function(String?)? onFieldSubmitted;
+  final Function(String)? onChanged;
   final int? maxLength;
   final bool obscureText;
   final bool autofocus;
@@ -22,6 +23,7 @@ class CustomTextFormField extends StatelessWidget {
     this.autofocus = false,
     this.validator,
     this.onFieldSubmitted,
+    this.onChanged,
     this.prefixIcon,
     this.controller,
     this.textAlign = TextAlign.start,
@@ -51,7 +53,7 @@ class CustomTextFormField extends StatelessWidget {
               inputFormatters: inputFormatters ?? [],
               validator: validator,
               onFieldSubmitted: onFieldSubmitted,
-              
+              onChanged: onChanged,
               obscureText: obscureText,
               textAlign: textAlign,
               maxLength: maxLength,

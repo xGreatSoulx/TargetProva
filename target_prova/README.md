@@ -8,4 +8,5 @@ Projeto desenvolvimento como prova para Target Sistemas.
 ## 📚 Bibliotecas utilizadas
 - `shared_preference`
 - `mobx`
+- `flutter_mobx`
 - `url_launcher`

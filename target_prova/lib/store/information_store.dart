@@ -20,7 +20,7 @@ abstract class _InformationStore with Store {
   ];
 
   @action
-  void addInformation(String information, int? hashCode) {
+  void addInformation() {
     if (hashCodeCurrentInformation != null) {
       informations = informations.map((information) {
         if (information.hashCode == hashCodeCurrentInformation) {
@@ -37,7 +37,13 @@ abstract class _InformationStore with Store {
   }
 
   @action
-  void removeInformation(int hashcode) {
-    informations.removeWhere((e) => e.hashCode == hashCode);
+  void removeInformation(int index) {
+    informations.removeAt(index);
+  }
+
+  @action
+  void editInformation(int index) {
+    currentInformation = informations[index];
+    hashCodeCurrentInformation = informations[index].hashCode;
   }
 }

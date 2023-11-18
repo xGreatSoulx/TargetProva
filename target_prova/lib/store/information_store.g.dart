@@ -62,22 +62,33 @@ mixin _$InformationStore on _InformationStore, Store {
       ActionController(name: '_InformationStore', context: context);
 
   @override
-  void addInformation(String information, int? hashCode) {
+  void addInformation() {
     final _$actionInfo = _$_InformationStoreActionController.startAction(
         name: '_InformationStore.addInformation');
     try {
-      return super.addInformation(information, hashCode);
+      return super.addInformation();
     } finally {
       _$_InformationStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void removeInformation(int hashcode) {
+  void removeInformation(int index) {
     final _$actionInfo = _$_InformationStoreActionController.startAction(
         name: '_InformationStore.removeInformation');
     try {
-      return super.removeInformation(hashcode);
+      return super.removeInformation(index);
+    } finally {
+      _$_InformationStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void editInformation(int index) {
+    final _$actionInfo = _$_InformationStoreActionController.startAction(
+        name: '_InformationStore.editInformation');
+    try {
+      return super.editInformation(index);
     } finally {
       _$_InformationStoreActionController.endAction(_$actionInfo);
     }

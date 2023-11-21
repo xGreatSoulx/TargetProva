@@ -20,7 +20,7 @@ class PageRoutes {
 
       case informationsPage:
         return MaterialPageRoute(
-          builder: (context) => const InformationsPage(),
+          builder: (context) => InformationsPage(),
           settings: settings,
         );
 

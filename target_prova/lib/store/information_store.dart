@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:mobx/mobx.dart';
 
 part 'information_store.g.dart';
@@ -5,45 +7,34 @@ part 'information_store.g.dart';
 class InformationStore = _InformationStore with _$InformationStore;
 
 abstract class _InformationStore with Store {
-  @observable
-  int? hashCodeCurrentInformation;
+  int? _index;
 
   @observable
   String currentInformation = '';
 
-  @observable
-  List<String> informations = [
-    'INFO1',
-    'INFO2',
-    'INFO3',
-    'INFO4',
-  ];
+  ObservableList<String> informations = ObservableList<String>();
 
   @action
   void addInformation() {
-    if (hashCodeCurrentInformation != null) {
-      informations = informations.map((information) {
-        if (information.hashCode == hashCodeCurrentInformation) {
-          return currentInformation;
-        }
-        return information;
-      }).toList();
+    if (_index != null) {
+      informations[_index!] = currentInformation;
     } else {
       informations.add(currentInformation);
     }
 
     currentInformation = '';
-    hashCodeCurrentInformation = null;
+    _index = null;
   }
 
   @action
-  void removeInformation(int index) {
-    informations.removeAt(index);
-  }
+  void removeInformation(int index) => informations.removeAt(index);
 
   @action
   void editInformation(int index) {
     currentInformation = informations[index];
-    hashCodeCurrentInformation = informations[index].hashCode;
+    _index = index;
   }
+
+  @action
+  void setCurrentInformation(String value) => currentInformation = value;
 }

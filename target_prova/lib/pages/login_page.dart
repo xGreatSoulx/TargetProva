@@ -55,7 +55,13 @@ class _LoginPageState extends State<LoginPage> {
                   return null;
                 },
               ),
-              const Divider(height: 20),
+              const Visibility(
+                visible: false,
+                maintainSize: true,
+                maintainAnimation: true,
+                maintainState: true,
+                child: Divider(),
+              ),
               CustomTextFormField(
                 controller: senhaController,
                 labelText: 'Senha',
@@ -73,7 +79,13 @@ class _LoginPageState extends State<LoginPage> {
                   return null;
                 },
               ),
-              const Divider(height: 30),
+              const Visibility(
+                visible: false,
+                maintainSize: true,
+                maintainAnimation: true,
+                maintainState: true,
+                child: Divider(),
+              ),
               SizedBox(
                 width: 160,
                 height: 45,

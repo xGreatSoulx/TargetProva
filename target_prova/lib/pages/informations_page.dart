@@ -5,14 +5,9 @@ import 'package:url_launcher/url_launcher.dart';
 import '../widgets/custom_text_form_field.dart';
 import '../store/information_store.dart';
 
-class InformationsPage extends StatefulWidget {
-  const InformationsPage({super.key});
+class InformationsPage extends StatelessWidget {
+  InformationsPage({super.key});
 
-  @override
-  State<InformationsPage> createState() => _InformationsPageState();
-}
-
-class _InformationsPageState extends State<InformationsPage> {
   final informationStore = InformationStore();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -142,8 +137,7 @@ class _InformationsPageState extends State<InformationsPage> {
 
                       return null;
                     },
-                    onChanged: (value) =>
-                        informationStore.currentInformation = value,
+                    onChanged: informationStore.setCurrentInformation,
                     onFieldSubmitted: (value) {
                       if (formKey.currentState!.validate()) {
                         informationStore.addInformation();
